@@ -85,8 +85,40 @@ class Solution:
         maxSquare = maxSide*maxSide
         return maxSquare
 
+    def maximalSquare3(self):
+        matrix = self.matrix
+        if len(matrix) == 0 or len(matrix[0]) == 0:
+            return 0
+
+        rows, columns = len(matrix), len(matrix[0])
+        # 初始化dp[]列表解析方法
+        dp = [0 for _ in range(columns)]
+        maxSide = 0
+        westNorthKey = 0
+        for i in range(rows):
+            for j in range(columns):
+                #即将更新dp[j]的值，先保存，现在的dp[j]相当于dp[i-1][j],更新后的为dp[i][j]
+                # 更新dp[j]即相当于用下一行的数据覆盖上一行
+                #temp值保存个循环dp[j+1]，即相当于dp[i][j+1]的左上角的值
+                temp = dp[j]
+                if matrix[i][j] == '1':
+                    # 判断边界，最上边和最左边的面积最大为1
+                    if i == 0 or j == 0:
+                        dp[j] = 1
+                    else:
+                        dp[j] = min(dp[j], dp[j-1], westNorthKey)+1
+                    maxSide = max(maxSide, dp[j])
+                else:
+                    dp[j] = 0
+                #下一个dp[j+1]的左上角即当前dp[j]的正上方
+                westNorthKey = temp
+
+        maxSquare = maxSide*maxSide
+        return maxSquare
+        
+
 
 if __name__ == "__main__":
     s = Solution()
 
-    print(s.maximalSquare2())
+    print(s.maximalSquare3())
