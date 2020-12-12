@@ -1,6 +1,5 @@
 package 数据结构.队列;
 
-import java.util.List;
 
 class Queue {
     private int[] data;
