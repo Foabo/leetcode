@@ -29,9 +29,8 @@ public class QuickSort {
     }
 
     public static void sort(int[] nums, int low, int high) {
-        if                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            (   l   o   w   >  hi gh) {
+        if (low >= high)
             return;
-        }
         int mid = partition(nums, low, high);
         sort(nums, low, mid - 1);
         sort(nums, mid + 1, high);
